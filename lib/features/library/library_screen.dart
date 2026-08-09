@@ -25,15 +25,20 @@ class LibraryScreen extends ConsumerWidget {
         folderId == null ? null : ref.watch(folderProvider(folderId!));
 
     final title = folderId == null
-        ? '필사'
-        : (currentFolder?.value?.name ?? '폴더');
+      ? 'PILSA'
+      : (currentFolder?.value?.name ?? '폴더');
 
     return Scaffold(
       appBar: AppBar(
         leading: folderId == null
             ? null
             : BackButton(onPressed: () => _goUp(context, ref)),
-        title: Text(title),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: gallery ? '목록형 보기' : '갤러리형 보기',
@@ -48,10 +53,25 @@ class LibraryScreen extends ConsumerWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
         onPressed: () => _showCreateSheet(context, ref),
-        icon: const Icon(Icons.add),
-        label: const Text('새 필사'),
+        tooltip: '새 필사',
+        child: Stack(
+          alignment: Alignment.center,
+          children: const [
+            Icon(Icons.menu_book_outlined, size: 24),
+            Positioned(
+              right: 6,
+              bottom: 6,
+              child: CircleAvatar(
+                radius: 8,
+                backgroundColor: Colors.white,
+                child: Icon(Icons.add, size: 12, color: Colors.black),
+              ),
+            ),
+          ],
+        ),
       ),
       body: folders.when(
         loading: () => const Center(child: CircularProgressIndicator()),

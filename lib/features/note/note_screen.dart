@@ -205,16 +205,35 @@ class _NoteScreenState extends ConsumerState<NoteScreen> {
                   showClipboardCopy: false,
                   showClipboardCut: false,
                   showClipboardPaste: false,
+                  buttonOptions: QuillSimpleToolbarButtonOptions(
+                    backgroundColor: QuillToolbarColorButtonOptions(
+                      iconData: Icons.brush,
+                      tooltip: '형광펜',
+                    ),
+                  ),
                 ),
               ),
               const Divider(height: 1),
               Expanded(
                 child: QuillEditor.basic(
                   controller: quill,
-                  config: const QuillEditorConfig(
+                  config: QuillEditorConfig(
                     padding: EdgeInsets.all(16),
                     placeholder: '여기에 필사를 시작하세요…',
                     expands: true,
+                    customStyles: DefaultStyles(
+                      paragraph: DefaultTextBlockStyle(
+                        Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(height: 1.6) ??
+                            const TextStyle(height: 1.6),
+                        const HorizontalSpacing(0, 0),
+                        const VerticalSpacing(0, 0),
+                        const VerticalSpacing(0, 0),
+                        null,
+                      ),
+                    ),
                   ),
                 ),
               ),

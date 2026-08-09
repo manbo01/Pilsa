@@ -21,7 +21,7 @@ class _PilsaAppState extends ConsumerState<PilsaApp> {
   Widget build(BuildContext context) {
     final themeMode = ref.watch(themeModeProvider);
     return MaterialApp.router(
-      title: '필사',
+      title: 'PILSA',
       debugShowCheckedModeBanner: false,
       theme: buildTheme(Brightness.light),
       darkTheme: buildTheme(Brightness.dark),
